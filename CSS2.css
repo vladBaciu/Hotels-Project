@@ -1,0 +1,120 @@
+.header {
+    background: url("images/header-bg.jpg") repeat scroll 0 0 #3B5998;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+.title {
+    height: 45%;
+    padding: 8px;
+    position: relative;
+    width: 98%;
+}
+.loginDisplay {
+    color: #FFFFFF;
+    font-size: 1.1em;
+    position: absolute;
+    right: 15px;
+    text-align: right;
+    top: 15px;
+}
+#login:hover {
+    background-color: rgb(26, 66, 141);
+    height: 10px;
+}
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+    float: center
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 200px;
+    float:center;
+    left: 500px;
+  
+    background-color: #fefefe;
+    width: 40%;
+    height: 35%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #3B5998;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    height: 20px;
+    padding: 2px 16px;
+    background-color: #3B5998;
+    color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
