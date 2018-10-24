@@ -92,7 +92,7 @@ while(($row = mysqli_fetch_array($result))) {
   </div>
   <div class="modal-body">
   <div class="form-modal">
-          <form class="login-form" method="POST" style="margin-top: 20px">
+          <form class="login-form" method="POST" action="writeToDb.php" style="margin-top: 20px">
 
         <div class="left-form" style="float:left">
             <label for="place">Nume locatie: </label>
@@ -108,14 +108,20 @@ while(($row = mysqli_fetch_array($result))) {
 
         <div class="right-form" style="float:right">
             <label for="color">Culoare cerc:  </label>
-            <input type="text" name="color" placeholder="culoare" id="color" required/> <br><br>
-
+            <select name="color">  
+                                <option value="green">green</option>
+                                <option value="red">red</option>
+                                <option value="yellow">yellow</option>
+                                <option value="black">black</option>
+                                <option value="brown">brown</option>
+                                <option value="purple">purple</option>
+            </select><br><br>
             <label for="size">Marime cerc:  </label>
             <input type="number" name="marime" placeholder="marime" id="size" required/> <br><br>
 
 
             <label for="price">Pret/zi:   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
-            <input type="number" name="longitudine" placeholder="pret" id="price" required/> <br><br>
+            <input type="number" name="pret" placeholder="pret" id="price" required/> <br><br>
         </div>
 
         <div class="button-form" style="float: right;margin-top: 21px; margin-left: 300px ">
