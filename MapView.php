@@ -23,7 +23,7 @@ $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: main.php");
     exit;
-}
+} 
 
 $sql = "select * from locations";
 
@@ -174,7 +174,7 @@ function myMap(stars,flag) {
      }
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwKV83Ug8_e9RD0z53qbts1pEi9XJ7RKg&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=XXXXXX&callback=myMap"></script>
 
 </body>
 </html>
