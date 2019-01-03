@@ -1,22 +1,22 @@
 <!-- my API key AIzaSyCwKV83Ug8_e9RD0z53qbts1pEi9XJ7RKg-->
 
+<!-- File name: interface1.php
+     Description: implements the interface of the administrator. The interface shows the table with
+                  the location from database,the MAP button and the add hotels button. -->
 <?php
+
 session_start();
-
-
-
-/* Start Define DB informations */
+/* XAMPP database informations */
 
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'db_project');
-
-/* End Define DB informations */
  
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
+/* The attempt of accessing the page unlogged is unallowed */
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: main.php");
     exit;
@@ -35,6 +35,7 @@ if(array_key_exists('test',$_POST)){
 $sql = "select * from locations";
 
 $result = mysqli_query($link,$sql);
+/* Declare arrays to store DB entries */
 $elemente = array() ;
 $name_of_location=array();
 $latitudine = array();
@@ -43,6 +44,7 @@ $color=array();
 $size=array();
 $price=array();
 
+/* Fetch the data from database */
 while(($row = mysqli_fetch_array($result))) {
     $latitudine[] = $row['Latitude'];
     $longitudine[]= $row['Longitude'];
@@ -53,13 +55,13 @@ while(($row = mysqli_fetch_array($result))) {
     $elemente[] = $row;
 }
 
+/* Show alert message when a new location is added */
 $_SESSION['dbElements'] = $row;
 if ($_SESSION['writeDB']==1 && $_SESSION['done']==1 )
 {
     $_SESSION['writeDB']=-1;
-$message = "Locatia a fost adaugata in baza de date.";
-echo "<script type='text/javascript'>alert('$message');</script>";
-
+    $message = "Locatia a fost adaugata in baza de date.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
 }
 else if ($_SESSION['writeDB']==1 && $_SESSION['done']==0 )
 {
@@ -76,7 +78,7 @@ else{};
 <head>
         <title> MAP VIEW </title>
         <link rel="stylesheet" type="text/css" href="CSS2.css">
-        <link rel="stylesheet" type="text/css" href="tabel.css">
+        <link rel="stylesheet" type="text/css" href="tabel_and_others.css">
         <script src="ModalForm.js" type="text/javascript"></script> 
 </head>
 <body>
@@ -100,7 +102,7 @@ else{};
                     <button id="mapBtn" style="width:100px; height: 40px">MAP</button>  
 </div>
 
-
+<!-- Implement table  -->
 <table class = "table table-bordered">
   <tr>
     <th>Latitudine</th>
@@ -111,6 +113,7 @@ else{};
     <th>Pret/zi</th>
   </tr>
   <?php 
+/* Add the elements from DB into de columns */
  foreach ($elemente as $row) { ?> 
   <tr> 
     <td><?php echo $row['Latitude']; ?></td> 
@@ -124,10 +127,7 @@ else{};
 <?php } ?> 
 </table>
 
-
-
 <div id="myModal" class="modal" style="float:center">
-
 <!-- Modal content -->
 <div class="modal-content">
   <div class="modal-header">
@@ -181,18 +181,18 @@ else{};
 </div>
 
 </div>
-
-<!-- JS for modal form -->
-
-<script>  process_modal_form(); </script>
-
-<!-- JS for modal form -->
-
 </div>
 </body>
 </html>
+
 <script type="text/javascript">
     document.getElementById("mapBtn").onclick = function () {
         location.href = "MapView.php";
     };
+</script>
+
+<script> 
+
+process_modal_form();
+
 </script>

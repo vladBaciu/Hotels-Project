@@ -84,7 +84,7 @@ if(isset($_POST['user']))
 <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- Link CSS1 file to this file. -->
-    <link rel="stylesheet" type="text/css" href="CSS1.css">   
+    <link rel="stylesheet" type="text/css" href="mainPage.css">   
    <title> PROIECT TIM </title>
 </head>
 <body>

@@ -1,18 +1,19 @@
 <!-- my API key AIzaSyCwKV83Ug8_e9RD0z53qbts1pEi9XJ7RKg-->
 
+<!-- File name: interface0.php
+     Description: implements the interface of the user. The interface shows the table with
+                  the location from database and the MAP button -->
 <?php
 session_start();
 
 
-/* Start Define DB informations */
+/* XAMPP database informations */
 
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'db_project');
 
-/* End Define DB informations */
- 
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
@@ -41,6 +42,8 @@ if(array_key_exists('test',$_POST)){
 $sql = "select * from locations";
 
 $result = mysqli_query($link,$sql);
+
+/* declare arrays to store the database entries */
 $elemente = array();
 $name_of_location=array();
 $latitudine = array();
@@ -51,13 +54,14 @@ $price=array();
 
 /* Store each column into an array */
 while(($row = mysqli_fetch_array($result))) {
-    $latitudine[] = $row['Latitude'];
-    $longitudine[]= $row['Longitude'];
-    $name_of_location[]=$row['Name'];
-    $color[]=$row['Color'];
-    $size[]=$row['size'];
-    $price[]=$row['price'];
-    $elemente[] = $row;
+
+        $latitudine[] = $row['Latitude'];
+        $longitudine[]= $row['Longitude'];
+        $name_of_location[]=$row['Name'];
+        $color[]=$row['Color'];
+        $size[]=$row['size'];
+        $price[]=$row['price'];
+        $elemente[] = $row;
 }
 
 ?>
@@ -67,7 +71,7 @@ while(($row = mysqli_fetch_array($result))) {
 <head>
         <title> MAP VIEW </title>
         <link rel="stylesheet" type="text/css" href="CSS2.css">
-        <link rel="stylesheet" type="text/css" href="tabel.css">
+        <link rel="stylesheet" type="text/css" href="tabel_and_others.css">
 </head>
 <body>
 
@@ -90,31 +94,34 @@ while(($row = mysqli_fetch_array($result))) {
 <div class="btn" style="margin-top: 20px;margin-right: 20px; float: float">
                     <button id="mapBtn" style="width:100px; height: 40px">MAP</button>  
 </div>
+<!-- Implement table of locations -->
 <table class = "table table-bordered">
-  <tr>
-    <th>Latitudine</th>
-    <th>Longitudine</th>
-    <th>Nume</th>
-    <th>Culoare</th>
-    <th>Marime</th>
-    <th>Pret/zi</th>
-  </tr>
-  <?php 
- foreach ($elemente as $row) { ?> 
-  <tr> 
-    <td><?php echo $row['Latitude']; ?></td> 
-    <td><?php echo $row['Longitude']; ?></td> 
-    <td><?php echo $row['Name']; ?></td> 
-    <td><?php echo $row['Color']; ?></td> 
-    <td><?php echo $row['size']; ?></td> 
-    <td><?php echo $row['price']; ?></td> 
-  <td></td> 
-  </tr> 
-<?php } ?> 
+    <tr>
+            <th>Latitudine</th>
+            <th>Longitudine</th>
+            <th>Nume</th>
+            <th>Culoare</th>
+            <th>Marime</th>
+            <th>Pret/zi</th>
+    </tr>
+    <?php 
+/* Print all entries from the database into the table */
+    foreach ($elemente as $row) { ?> 
+    <tr> 
+            <td><?php echo $row['Latitude']; ?></td> 
+            <td><?php echo $row['Longitude']; ?></td> 
+            <td><?php echo $row['Name']; ?></td> 
+            <td><?php echo $row['Color']; ?></td> 
+            <td><?php echo $row['size']; ?></td> 
+            <td><?php echo $row['price']; ?></td> 
+            <td></td> 
+    </tr> 
+    <?php } ?> 
 </table>
 </body>
 </html>
 
+<!-- Redirect the user when the map button is pressed -->
 <script type="text/javascript">
     document.getElementById("mapBtn").onclick = function () {
         location.href = "MapView.php";

@@ -23,7 +23,7 @@ $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: main.php");
     exit;
-} 
+}
 
 $sql = "select * from locations";
 
@@ -46,6 +46,8 @@ while(($row = mysqli_fetch_array($result))) {
     $price[]=$row['price'];
 }
 
+
+$stars = 0;
 ?>
 
 <!DOCTYPE html>
@@ -53,10 +55,18 @@ while(($row = mysqli_fetch_array($result))) {
 <head>
         <title> MAP VIEW </title>
         <link rel="stylesheet" type="text/css" href="CSS2.css">
+        <link rel="stylesheet" type="text/css" href="tabel_and_others.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            .checked 
+            {
+            color: orange;
+                    }
+        </style>
 </head>
 <body>
 
@@ -66,34 +76,51 @@ while(($row = mysqli_fetch_array($result))) {
     </div>
 </div>
 
-  
-  <div class="btn-group" style = "margin-top: 20px;margin-left:1050px float: float">
-  <button onclick="myMap('green',5)" type="button" class="btn btn-primary">5 stele</button>
-  <button onclick="myMap('red',4)" type="button" class="btn btn-primary">4 stele</button>
-  <button onclick="myMap('purple',3)" type="button" class="btn btn-primary">3 stele</button>
-  <button onclick="myMap('blue',2)" type="button" class="btn btn-primary">2 stele</button>
-  <button onclick="myMap('others',1)" type="button" class="btn btn-primary">1 stele</button>
-  <button onclick="myMap('',6)" type="button" class="btn btn-primary">Toate hotelurile</button>
-</div>
+
+
+ </div>
+    <div class="btn-group" style = "margin-top: 0px;margin-left:1050px float: float">
+    <button id = "b5" onclick="myMap('green',5)" type="button" class="btn btn-primary">5 stele</button>
+    <button id = "b4" onclick="myMap('red',4)" type="button" class="btn btn-primary">4 stele</button>
+    <button id = "b3" onclick="myMap('purple',3)" type="button" class="btn btn-primary">3 stele</button>
+    <button id = "b2" onclick="myMap('blue',2)" type="button" class="btn btn-primary">2 stele</button>
+    <button id = "b1" onclick="myMap('others',1)" type="button" class="btn btn-primary">1 stele</button>
+    <button id = "b0"onclick="myMap('',6)" type="button" class="btn btn-primary">Toate hotelurile</button>
+
+    <?php
+    echo '<p id="demo">
+            <span id ="s1" class="fa fa-star "></span>
+            <span id ="s2" class="fa fa-star "></span>
+            <span id ="s3" class="fa fa-star "></span>
+            <span id ="s4" class="fa fa-star"></span>
+            <span id ="s5" class="fa fa-star"></span>
+          </p>'
+    ?>
+ </div>
 <script>
 
 </script>
 <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" title="CALITATEA SERVICIILOR" 
-        style = "margin-top: 20px; margin-left:150px; float: left"
+        style = "margin-top: 0px; margin-left:150px; float: left"
         data-content="<div>
-         <b>Verde</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5 stele <br>
-         <b>Rosu</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4 stele <br>
-         <b>Mov</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3 stele <br>
-         <b>Albastru</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2 stele <br>
-         <b>Altele</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 stele <br>
+         <b style= 'color: green' >Verde</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         5 stele <br>
+         <b style= 'color: red'>Rosu</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         4 stele <br>
+         <b style= 'color: purple'>Mov</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         3 stele <br>
+         <b style= 'color: blue'>Albastru</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         2 stele <br>
+         <b style= 'color: gray'>Altele</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         1 stele <br>
         
         
         </div>" 
-        data-html="true">
+        data-html="true" data-style ="true">
   Legenda
 </button>
-<!-- <p id="demo"></p> -->
-<div id="map" style="width:50%;height:550px; margin-top: 15px; margin-left:390px"></div>
+
+<div id="map" style="width:50%;height:550px; margin-top: 5px; margin-left:390px"></div>
 
 <script>
 function myMap(stars,flag) {
@@ -172,9 +199,12 @@ function myMap(stars,flag) {
 
                     map.fitBounds(bounds);
      }
+
+
+
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=XXXXXX&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwKV83Ug8_e9RD0z53qbts1pEi9XJ7RKg&callback=myMap"></script>
 
 </body>
 </html>
@@ -187,5 +217,73 @@ $(function () {
 </script>
 
 
+<!-- Script for the stars -->
+<script>
+$(function ()
+{
+   
+     var s1 =document.getElementById('s1');
+     var s2 =document.getElementById('s2');
+     var s3 =document.getElementById('s3');
+     var s4 =document.getElementById('s4');
+     var s5 =document.getElementById('s5');
+    document.getElementById('b5').onclick = function(){
+        myMap('green',5);
+        s1.className = "fa fa-star checked";
+        s2.className = "fa fa-star checked";
+        s3.className = "fa fa-star checked";
+        s4.className = "fa fa-star checked";
+        s5.className = "fa fa-star checked";
+    };
+    
+
+    document.getElementById('b4').onclick = function(){
+        myMap('red',4);
+        s1.className = "fa fa-star checked";
+        s2.className = "fa fa-star checked";
+        s3.className = "fa fa-star checked";
+        s4.className = "fa fa-star checked";
+        s5.className = "fa fa-star ";
+    };
+
+    document.getElementById('b3').onclick = function(){
+        myMap('purple',3);
+        s1.className = "fa fa-star checked";
+        s2.className = "fa fa-star checked";
+        s3.className = "fa fa-star checked";
+        s4.className = "fa fa-star ";
+        s5.className = "fa fa-star ";
+    };
+
+    document.getElementById('b2').onclick = function(){
+        myMap('blue',2);
+        s1.className = "fa fa-star checked";
+        s2.className = "fa fa-star checked";
+        s3.className = "fa fa-star ";
+        s4.className = "fa fa-star ";
+        s5.className = "fa fa-star ";
+    };
+    document.getElementById('b1').onclick = function(){
+        myMap('others',1);
+        s1.className = "fa fa-star checked";
+        s2.className = "fa fa-star ";
+        s3.className = "fa fa-star ";
+        s4.className = "fa fa-star ";
+        s5.className = "fa fa-star ";
+    };
+    document.getElementById('b0').onclick = function(){
+        myMap('',6);
+        s1.className = "fa fa-star ";
+        s2.className = "fa fa-star ";
+        s3.className = "fa fa-star ";
+        s4.className = "fa fa-star ";
+        s5.className = "fa fa-star ";
+    };
+    
+})
+
+
+
+</script>
 
 

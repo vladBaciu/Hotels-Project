@@ -1,4 +1,3 @@
-
 .header {
     background: url("images/header-bg.jpg") repeat scroll 0 0 #3B5998;
     height: 100px;
@@ -118,4 +117,3 @@
     from {opacity: 0} 
     to {opacity: 1}
 }
-
