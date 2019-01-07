@@ -1,4 +1,4 @@
-<!-- my API key AIzaSyCwKV83Ug8_e9RD0z53qbts1pEi9XJ7RKg-->
+<!-- my API key xxg-->
 
 <!-- File name: interface0.php
      Description: implements the interface of the user. The interface shows the table with
